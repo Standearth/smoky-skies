@@ -51,7 +51,7 @@
 	var  WAQI_URL    =  "https://tiles.waqi.info/tiles/usepa-aqi/{z}/{x}/{y}.png?token=d800f4e8f0e93c89baa35ab64a7f4e3d86a541e6";  
       var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
       var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});
-	  map.addLayer(waqiLayer);  
+	  //map.addLayer(waqiLayer);  
 
 	// Read markers data from data.csv
 	$.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRmLiofzQXzrbSqu0DjBHypIdTtUZBA6fVZkjh6BxiKyuVDhw4EY-8ubGqBO9gUMPyElwKS4-jd4gKU/pub?output=csv', function(csvString) {
