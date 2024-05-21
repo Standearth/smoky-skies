@@ -154,9 +154,9 @@ div.airquality {
 		for (var i in data) {	
 		var row = data[i];
 		var popup;
-		if (row.Type == 'photo') {
+		if (row.Type == 'Photo') {
 			popup = '<div style="text-align:center;">'+row.Name+', '+row.City+'<img style="max-width:300px;" src="'+row.Image+'">';
-		} else if (row.Type == 'video') {
+		} else if (row.Type == 'Video') {
 			popup ='<div style="text-align:center;">'+row.Name+', '+row.City+'<iframe src="'+row.Image+'" width="300" height="200" frameborder="0"></iframe>';
 		}
 		 
