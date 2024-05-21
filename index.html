@@ -138,10 +138,20 @@ div.airquality {
 
 		// Use PapaParse to convert string to array of objects
 		var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+		var redIcon = L.icon({
+			iconUrl: 'assets/marker-icon2.png',
+			shadowUrl: 'assets/marker-shadow.png',
+
+			iconSize:     [38, 95], // size of the icon
+			shadowSize:   [50, 64], // size of the shadow
+			iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			shadowAnchor: [4, 62],  // the same for the shadow
+			popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		});
 
 		// For each row in data, create a marker and add it to the map
 		// For each row, columns `Latitude`, `Longitude`, and `Title` are required
-		for (var i in data) {
+		for (var i in data) {	
 		var row = data[i];
 		var popup;
 		if (row.Type == 'photo') {
@@ -152,8 +162,9 @@ div.airquality {
 		 
 
 		var marker = L.marker([row.Lat, row.Long], {
-			opacity: 1
-		}).bindPopup('<div style="text-align:center;width">'+row.Name+', '+row.City+'<img style="max-width:300px;" src="'+row.Image+'">');
+			opacity: 1,
+			icon: redIcon
+		}).bindPopup(popup);
 		
 		
 
