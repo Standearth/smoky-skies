@@ -143,6 +143,13 @@ div.airquality {
 		// For each row, columns `Latitude`, `Longitude`, and `Title` are required
 		for (var i in data) {
 		var row = data[i];
+		var popup;
+		if (row.Type == 'photo') {
+			popup = '<div style="text-align:center;">'+row.Name+', '+row.City+'<img style="max-width:300px;" src="'+row.Image+'">';
+		} else if (row.Type == 'video') {
+			popup ='<div style="text-align:center;">'+row.Name+', '+row.City+'<iframe src="'+row.Image+'" width="300" height="200" frameborder="0"></iframe>'
+		}
+		 
 
 		var marker = L.marker([row.Lat, row.Long], {
 			opacity: 1
