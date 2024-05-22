@@ -96,7 +96,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-div.airquality {
+div.airquality, div.wildfires {
 	display:inline;
 	position:relative;
 	top:4px;
@@ -114,7 +114,12 @@ div.airquality {
 		<input class="airquality" type="checkbox" name="airquality" onclick="toggleLayers()">
 		<span class="slider round"></span>
 	  </label>
-	<div class="airquality">Show PM2.5 air quality markers (source: <a href="https://aqicn.org/" target="_new">AQNI</a>)</div>
+	<div class="airquality" style="margin-right:20px;">Show PM2.5 air quality markers (source: <a href="https://aqicn.org/" target="_new">AQNI</a>)</div>
+	<label class="switch">
+		<input class="wildfires" type="checkbox" name="wildfires" onclick="toggleLayersWildfires()">
+		<span class="slider round"></span>
+	  </label>
+	<div class="wildfires">Show active wildfires (source: <a href="https://firms.modaps.eosdis.nasa.gov/" target="_new">NASA FIRMS</a>)</div>
 </div>
 <div id="map" style="width: 100%; height: 500px; position: relative; outline-style: none;" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a> <span aria-hidden="true">|</span> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a></div></div></div></div>
 <div id="soapboxx">
@@ -136,7 +141,7 @@ div.airquality {
       var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
       var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});
 
-
+	var fg = L.featureGroup();
 
 	// Read markers data from data.csv
 	$.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRmLiofzQXzrbSqu0DjBHypIdTtUZBA6fVZkjh6BxiKyuVDhw4EY-8ubGqBO9gUMPyElwKS4-jd4gKU/pub?output=csv', function(csvString) {
@@ -185,7 +190,7 @@ div.airquality {
 		// Use PapaParse to convert string to array of objects
 		var dataf = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
 		var flameIcon = L.icon({
-			iconUrl: 'assets/flame-icon.png',
+			iconUrl: 'assets/flame_icon.png',
 			shadowUrl: 'assets/marker-shadow.png',
 
 			iconSize:     [12, 20], // size of the icon
@@ -207,7 +212,7 @@ div.airquality {
 
 
 
-		markerf.addTo(map);
+		markerf.addTo(fg);
 
 		}
 
@@ -218,6 +223,14 @@ div.airquality {
 	  		map.addLayer(waqiLayer);  
 		} else {
 			map.removeLayer(waqiLayer);
+		}
+	}
+
+	function toggleLayersWildfires() {
+		if ($('input.wildfires').is(":checked")) {
+	  		map.addLayer(fg);  
+		} else {
+			map.removeLayer(fg);
 		}
 	}
 
