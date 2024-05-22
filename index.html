@@ -136,6 +136,8 @@ div.airquality {
       var  WAQI_ATTR  =  'Air  Quality  Tiles  &copy;  <a  href="http://waqi.info">waqi.info</a>';  
       var  waqiLayer  =  L.tileLayer(WAQI_URL,  {attribution:  WAQI_ATTR});
 
+
+
 	// Read markers data from data.csv
 	$.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRmLiofzQXzrbSqu0DjBHypIdTtUZBA6fVZkjh6BxiKyuVDhw4EY-8ubGqBO9gUMPyElwKS4-jd4gKU/pub?output=csv', function(csvString) {
 
@@ -170,6 +172,40 @@ div.airquality {
 		}).bindPopup(popup);
 		
 		
+
+		marker.addTo(map);
+
+		}
+
+		});
+
+		// Read markers data from data.csv
+	$.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRmLiofzQXzrbSqu0DjBHypIdTtUZBA6fVZkjh6BxiKyuVDhw4EY-8ubGqBO9gUMPyElwKS4-jd4gKU/pubhtml?gid=1205213646&single=true&output=csv', function(csvString) {
+
+		// Use PapaParse to convert string to array of objects
+		var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+		var flameIcon = L.icon({
+			iconUrl: 'assets/flame-icon.png',
+			shadowUrl: 'assets/marker-shadow.png',
+
+			iconSize:     [12, 20], // size of the icon
+			shadowSize:   [0, 0], // size of the shadow
+			//iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+			//shadowAnchor: [4, 62],  // the same for the shadow
+			//popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+		});
+
+		// For each row in data, create a marker and add it to the map
+		// For each row, columns `Latitude`, `Longitude`, and `Title` are required
+		for (var i in data) {	
+		var row = data[i];
+
+		var marker = L.marker([row.latitude, row.longitude], {
+			opacity: 1,
+			icon: flameIcon
+		});
+
+
 
 		marker.addTo(map);
 
