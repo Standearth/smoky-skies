@@ -138,7 +138,7 @@ div.airquality, div.wildfires {
    </div>
 </div>
 <script>
-
+//https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/IMSR_Incident_Locations_Most_Recent_View/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson
 	
 	const map = L.map('map').setView([48.4, -96.53], 4);
 
@@ -193,7 +193,7 @@ div.airquality, div.wildfires {
 		}
 
 		});
-
+// https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/IMSR_Incident_Locations_Most_Recent_View/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson
 		// Read markers data from data.csv
 	$.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRmLiofzQXzrbSqu0DjBHypIdTtUZBA6fVZkjh6BxiKyuVDhw4EY-8ubGqBO9gUMPyElwKS4-jd4gKU/pub?gid=1205213646&single=true&output=csv', function(csvString) {
 		console.log(csvString);
