@@ -157,7 +157,7 @@ div.airquality, div.wildfires {
 			<input class="wildfires" type="checkbox" name="wildfires" onclick="toggleLayersWildfires()">
 			<span class="slider round"></span>
 		</label>
-		<div class="wildfires">Show active wildfires</div>
+		<div class="wildfires">Show active wildfires (source: <a href="https://cwfis.cfs.nrcan.gc.ca/datamart/metadata/activefires">NRCAN</a>)</div>
 	</div>
 </div>
 <div id="map" style="width: 100%; height: 500px; position: relative; outline-style: none;" class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0"><div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(0px, 0px, 0px);"><div class="leaflet-top leaflet-right"></div><div class="leaflet-bottom leaflet-left"></div><div class="leaflet-bottom leaflet-right"><div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com/" title="A JavaScript library for interactive maps"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8" class="leaflet-attribution-flag"><path fill="#4C7BE1" d="M0 0h12v4H0z"></path><path fill="#FFD500" d="M0 4h12v3H0z"></path><path fill="#E0BC00" d="M0 7h12v1H0z"></path></svg> Leaflet</a> <span aria-hidden="true">|</span> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a></div></div></div></div>
@@ -221,7 +221,8 @@ div.airquality, div.wildfires {
 		});
 // https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/IMSR_Incident_Locations_Most_Recent_View/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson
 		// Read markers data from data.csv
-	$.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vRmLiofzQXzrbSqu0DjBHypIdTtUZBA6fVZkjh6BxiKyuVDhw4EY-8ubGqBO9gUMPyElwKS4-jd4gKU/pub?gid=1205213646&single=true&output=csv', function(csvString) {
+		//https://docs.google.com/spreadsheets/d/e/2PACX-1vRmLiofzQXzrbSqu0DjBHypIdTtUZBA6fVZkjh6BxiKyuVDhw4EY-8ubGqBO9gUMPyElwKS4-jd4gKU/pub?gid=1205213646&single=true&output=csv
+	$.get('https://cwfis.cfs.nrcan.gc.ca/downloads/activefires/activefires.csv', function(csvString) {
 		console.log(csvString);
 		// Use PapaParse to convert string to array of objects
 		var dataf = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
