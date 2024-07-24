@@ -195,8 +195,8 @@ div.airquality, div.wildfires {
 		var popup;
 		if (row.Type == 'Video') {
 			popup ='<div style="text-align:center;"><div class="info">'+row.Name+', '+row.City+'</div><div class="popdate">'+row.Date+'</div><div class="popcontent"><iframe src="'+row.Image+'" width="300" height="200" frameborder="0"></iframe></div>';
-		} if else (row.Type == 'Text') {
-			popup = '<div style="text-align:center;"><div class="info">'+row.Name+', '+row.City+'</div><div class="popdate">'+row.Date+'</div><div class="popcontent"><img style="max-width:300px;" src="'+row.Content+'">';
+		} else if (row.Type == 'Text') {
+			popup = '<div style="text-align:center;"><div class="info">'+row.Name+', '+row.City+'</div><div class="popdate">'+row.Date+'</div><div class="popcontent"><p><i>'+row.Content+'</i></p>';
 		} else {
 			popup = '<div style="text-align:center;"><div class="info">'+row.Name+', '+row.City+'</div><div class="popdate">'+row.Date+'</div><div class="popcontent"><img style="max-width:300px;" src="'+row.Content+'">';
 		}
